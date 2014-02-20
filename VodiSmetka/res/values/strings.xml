@@ -3,7 +3,6 @@
 
     <string name="app_name">Vodi Smetka</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="addPurchaseLabel">Add Purchase</string>
 	<string name="checkWeeklyLabel">Weekly spenditure</string>
 	<string name="checkMonthlyLabel">Monthly spenditure</string>
