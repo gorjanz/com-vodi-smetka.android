@@ -7,14 +7,14 @@ import java.util.Date;
  * @author Gorjan
  * Model class for the information available for a particular receipt
  */
-public class Receipt {
+public class ReceiptData {
 	
 	private String receiptImageId;
 	private int purchaseCost;
 	private String purchaseAddress;
 	private Date purchaseDate;
 
-	public Receipt(int purchaseCost, String purchaseAddress, Date purchaseDate) {
+	public ReceiptData(int purchaseCost, String purchaseAddress, Date purchaseDate) {
 		super();
 		this.purchaseCost = purchaseCost;
 		this.purchaseAddress = purchaseAddress;
@@ -52,7 +52,7 @@ public class Receipt {
 			return false;
 		if (o.getClass() != this.getClass())
 			return false;
-		Receipt cmp = (Receipt) o;
+		ReceiptData cmp = (ReceiptData) o;
 		return (receiptImageId.equals(cmp.receiptImageId)) &&
 				(purchaseCost==cmp.purchaseCost) &&
 				(purchaseAddress.equals(cmp.purchaseAddress)) &&
