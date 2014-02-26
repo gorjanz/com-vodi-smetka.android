@@ -1,21 +1,33 @@
 package com.vodismetka.activities;
 
+import java.util.Date;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 
 import com.vodismetka.R;
+import com.vodismetka.models.ReceiptData;
+import com.vodismetka.workers.ImageFactory;
+import com.vodismetka.workers.TessExtractor;
+import com.vodismetka.workers.TextAnalyzer;
 
 public class LaunchActivity extends Activity {
 
 	public static int CAMERA_PHOTO_REQUEST = 1;
+	public static final String TAG = "LaunchActivity";
 
 	private Button addPurchase;
 	private Button seeWeeklySpenditure;
 	private Button seeMonthlySpenditure;
+	
+	private ImageFactory imgFactory;
+	private TessExtractor tessExtractor;
+	private TextAnalyzer textAnalyzer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +71,44 @@ public class LaunchActivity extends Activity {
 
 		});
 
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(resultCode==RESULT_CANCELED)
+			return;
+		if(resultCode==RESULT_OK && requestCode==CAMERA_PHOTO_REQUEST){
+			Bundle returnData = data.getExtras();
+			Bitmap photo = (Bitmap) returnData.get("data");
+			String imageID = "img" + Long.toString(System.currentTimeMillis());
+			
+			//set-up image editing factory
+			imgFactory = new ImageFactory(photo, imageID);
+			
+			//get the image ready for text recognition
+			photo = imgFactory.getImg();
+			
+			//get tessExtractor object
+			tessExtractor = new TessExtractor(this, photo);
+			
+			//extract the text
+			String extractedText = tessExtractor.getText();
+			
+			//analyze the text
+			textAnalyzer = new TextAnalyzer(extractedText);
+			
+			//get the analyzed data
+			Date purchaseDate = textAnalyzer.getDate();
+			int purchaseCost = textAnalyzer.getCost();
+			String purchaseAddress = textAnalyzer.getAddress();
+			
+			//create the new receipt item
+			ReceiptData receiptItem = new ReceiptData(purchaseCost, purchaseAddress, purchaseDate);
+			
+			
+		}
+		
+		
 	}
 
 	@Override
