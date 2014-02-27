@@ -32,8 +32,15 @@ public class TessFactory {
 
 	public TessBaseAPI getTess() throws TesseractNotInitializedException,
 			FolderNotCreatedException {
-		if (tessBaseApi == null)
+		if (tessBaseApi == null){
 			init();
+			tessBaseApi = new TessBaseAPI();
+		}
+		if(tessBaseApi == null){
+			Log.i(TAG, "TessBaseAPI still not initialized, just successfully copied");
+		} else {
+			Log.i(TAG, "TessBaseAPI initialized...");
+		}
 		return tessBaseApi;
 	}
 

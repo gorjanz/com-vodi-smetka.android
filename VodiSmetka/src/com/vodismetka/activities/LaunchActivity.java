@@ -1,17 +1,16 @@
 package com.vodismetka.activities;
 
-import java.util.Date;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.vodismetka.R;
-import com.vodismetka.models.ReceiptData;
 import com.vodismetka.workers.ImageFactory;
 import com.vodismetka.workers.TessExtractor;
 import com.vodismetka.workers.TextAnalyzer;
@@ -24,6 +23,8 @@ public class LaunchActivity extends Activity {
 	private Button addPurchase;
 	private Button seeWeeklySpenditure;
 	private Button seeMonthlySpenditure;
+	
+	private Uri outputLocation;
 	
 	private ImageFactory imgFactory;
 	private TessExtractor tessExtractor;
@@ -80,7 +81,11 @@ public class LaunchActivity extends Activity {
 		if(resultCode==RESULT_OK && requestCode==CAMERA_PHOTO_REQUEST){
 			Bundle returnData = data.getExtras();
 			Bitmap photo = (Bitmap) returnData.get("data");
-			String imageID = "img" + Long.toString(System.currentTimeMillis());
+			
+			if(photo == null){
+				Log.e(TAG, "camera intent not returning any image...");
+			}
+			String imageID = "img" + Long.toString(System.currentTimeMillis()) + ".jpg";
 			
 			//set-up image editing factory
 			imgFactory = new ImageFactory(photo, imageID);
@@ -95,16 +100,19 @@ public class LaunchActivity extends Activity {
 			String extractedText = tessExtractor.getText();
 			
 			//analyze the text
-			textAnalyzer = new TextAnalyzer(extractedText);
+//			textAnalyzer = new TextAnalyzer(extractedText);
+			
+			seeMonthlySpenditure.setText(extractedText);
+			Log.i(TAG, "The extracted text is: " + extractedText);
 			
 			//get the analyzed data
-			Date purchaseDate = textAnalyzer.getDate();
-			int purchaseCost = textAnalyzer.getCost();
-			String purchaseAddress = textAnalyzer.getAddress();
-			
-			//create the new receipt item
-			ReceiptData receiptItem = new ReceiptData(purchaseCost, purchaseAddress, purchaseDate);
-			
+//			Date purchaseDate = textAnalyzer.getDate();
+//			int purchaseCost = textAnalyzer.getCost();
+//			String purchaseAddress = textAnalyzer.getAddress();
+//			
+//			//create the new receipt item
+//			ReceiptData receiptItem = new ReceiptData(purchaseCost, purchaseAddress, purchaseDate);
+//			
 			
 		}
 		

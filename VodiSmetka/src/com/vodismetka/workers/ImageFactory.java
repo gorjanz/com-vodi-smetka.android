@@ -20,6 +20,7 @@ public class ImageFactory {
 	
 	public ImageFactory(Bitmap img, String path) {
 		_path = path;
+		photo = img;
 		saveImage(img, path);
 		photo = prepareImage();
 		saveImage(photo, path);
@@ -97,6 +98,8 @@ public class ImageFactory {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		Log.i(TAG, "saved image successfully...");
 	}
 	
 	private Bitmap loadImage(String photoPath){

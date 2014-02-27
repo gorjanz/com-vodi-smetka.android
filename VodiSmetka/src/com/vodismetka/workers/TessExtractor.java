@@ -38,6 +38,9 @@ public class TessExtractor {
 			baseApi = tessFactory.getTess();
 		} catch (TesseractNotInitializedException e){
 			Log.e(TAG, e.getMessage());
+			if(baseApi == null){
+				Log.e(TAG, "TessBaseAPI is null... TessFactory not returning tess object...");
+			}
 		} catch (FolderNotCreatedException ee){
 			Log.e(TAG, ee.getMessage());
 		}
