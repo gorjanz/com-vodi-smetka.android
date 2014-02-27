@@ -17,8 +17,6 @@ If you have all the tools installed, you can proceed to setup the library for de
 >  - Ant download - http://ant.apache.org/bindownload.cgi
 >  - Ant installation - http://ant.apache.org/manual/install.html#setup
 
- - example tutorial application using this library - <a href="http://gaut.am/making-an-ocr-android-app-using-tesseract/">Simple OCR APP</a>
-
 also, you might want to set the PATH environment variable on your machine, to enable using all of the commands necessary for building the native library, and the way you do that is by: right-click My Computer -> Properties -> Advanced System Settings -> under the Advanced tab, you'll see Environment Variables -> User Variables for <user> and edit the PATH variable, to include all the destination folders for the scripts that you'll be using below.
 
 These are the steps, that I took, which enabled me to use the tesseract library in my project:
