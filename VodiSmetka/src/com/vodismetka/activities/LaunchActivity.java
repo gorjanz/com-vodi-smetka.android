@@ -3,7 +3,6 @@ package com.vodismetka.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -23,8 +22,6 @@ public class LaunchActivity extends Activity {
 	private Button addPurchase;
 	private Button seeWeeklySpenditure;
 	private Button seeMonthlySpenditure;
-	
-	private Uri outputLocation;
 	
 	private ImageFactory imgFactory;
 	private TessExtractor tessExtractor;
