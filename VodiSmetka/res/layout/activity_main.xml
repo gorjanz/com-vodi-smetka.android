@@ -6,29 +6,28 @@
     tools:context=".LaunchActivity" >
 
     <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/imgDesc"
-            android:src="@drawable/receipt_paper_0" />
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/imgDesc"
+        android:src="@drawable/receipt_paper_0" />
 
-        <Button
-            android:id="@+id/addNewReceipt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/addPurchaseLabel" />
-        
-		<Button
-            android:id="@+id/seeWeekly"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/checkWeeklyLabel" />
+    <Button
+        android:id="@+id/seeWeekly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/checkWeeklyLabel" />
 
-        <Button
-            android:id="@+id/seeMonthly"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/checkMonthlyLabel" />
-    
-    
+    <Button
+        android:id="@+id/seeMonthly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/checkMonthlyLabel" />
+
+    <Button
+        android:id="@+id/addNewReceipt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/addPurchaseLabel" />
+
 </LinearLayout>
