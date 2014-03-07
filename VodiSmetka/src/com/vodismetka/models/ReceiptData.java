@@ -1,7 +1,5 @@
 package com.vodismetka.models;
 
-import java.util.Date;
-
 /**
  * 
  * @author Gorjan
@@ -13,9 +11,11 @@ public class ReceiptData {
 	private String receiptImageId;
 	private int purchaseCost;
 	private String purchaseDate;
+	
+	public ReceiptData(){
+	}
 
 	public ReceiptData(int purchaseCost, String receiptImageId, String purchaseDate) {
-		super();
 		this.purchaseCost = purchaseCost;
 		this.purchaseDate = purchaseDate;
 		this.receiptImageId = receiptImageId;
@@ -25,6 +25,26 @@ public class ReceiptData {
 		return receiptImageId;
 	}
 
+	public int getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+
+	public void setReceiptImageId(String receiptImageId) {
+		this.receiptImageId = receiptImageId;
+	}
+
+	public void setPurchaseCost(int purchaseCost) {
+		this.purchaseCost = purchaseCost;
+	}
+
+	public void setPurchaseDate(String purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+
 	public int getPurchaseCost() {
 		return purchaseCost;
 	}
@@ -32,10 +52,6 @@ public class ReceiptData {
 
 	public String getPurchaseDate() {
 		return purchaseDate;
-	}
-	
-	public void setId(int id){
-		itemId = id;
 	}
 
 	@Override
