@@ -10,5 +10,8 @@
     <string name="newPhoto">new receipt</string>
     <string name="weeklyLabel">Weekly expenses</string>
     <string name="monthlyLabel">Monthly expenses</string>
+    <string name="correctThePrice">Correct the price</string>
+    <string name="correctTheDate">Correct the date</string>
+    <string name="getBack">Back</string>
 	
 </resources>
