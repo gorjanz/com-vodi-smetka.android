@@ -12,6 +12,7 @@ public class ReceiptSQLiteHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_PRICE = "price";
 	public static final String COLUMN_DATE = "date";
 	public static final String COLUMN_IMG = "receiptImg";
+	public static final String COLUMN_MONTH = "month";
 
 	public ReceiptSQLiteHelper(Context context) {
 		//create database "receipts_db" : version 1
@@ -34,7 +35,8 @@ public class ReceiptSQLiteHelper extends SQLiteOpenHelper {
 				+ ReceiptSQLiteHelper.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ ReceiptSQLiteHelper.COLUMN_PRICE + " INTEGER NOT NULL,"
 				+ ReceiptSQLiteHelper.COLUMN_DATE + " TEXT NOT NULL,"
-				+ ReceiptSQLiteHelper.COLUMN_IMG + "TEXT NOT NULL);");
+				+ ReceiptSQLiteHelper.COLUMN_IMG + " TEXT NOT NULL,"
+				+ ReceiptSQLiteHelper.COLUMN_MONTH + " INTEGER NOT NULL);");
 	}
 
 	@Override

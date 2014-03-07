@@ -11,14 +11,16 @@ public class ReceiptData {
 	private String receiptImageId;
 	private int purchaseCost;
 	private String purchaseDate;
+	private int month;
 	
 	public ReceiptData(){
 	}
 
-	public ReceiptData(int purchaseCost, String receiptImageId, String purchaseDate) {
+	public ReceiptData(int purchaseCost, String receiptImageId, String purchaseDate, int month) {
 		this.purchaseCost = purchaseCost;
 		this.purchaseDate = purchaseDate;
 		this.receiptImageId = receiptImageId;
+		this.month = month;
 	}
 	
 	public String getReceiptImageId() {
@@ -49,9 +51,16 @@ public class ReceiptData {
 		return purchaseCost;
 	}
 
-
 	public String getPurchaseDate() {
 		return purchaseDate;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
 	}
 
 	@Override
@@ -73,7 +82,5 @@ public class ReceiptData {
 		sb.append("Потрошено: " + purchaseCost + "\n");
 		return sb.toString();
 	}
-	
-	
 
 }
