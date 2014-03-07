@@ -9,25 +9,16 @@ import java.util.Date;
  */
 public class ReceiptData {
 	
+	private int itemId;
 	private String receiptImageId;
 	private int purchaseCost;
-	private String purchaseAddress;
 	private Date purchaseDate;
 
-	public ReceiptData(int purchaseCost, String purchaseAddress, Date purchaseDate) {
+	public ReceiptData(int purchaseCost, String receiptImageId, Date purchaseDate) {
 		super();
 		this.purchaseCost = purchaseCost;
-		this.purchaseAddress = purchaseAddress;
 		this.purchaseDate = purchaseDate;
-		receiptImageId = generateImageId();
-	}
-
-	private String generateImageId(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(Integer.toString(purchaseCost));
-		sb.append("-");
-		sb.append(Long.toString(purchaseDate.getTime()));
-		return sb.toString();
+		this.receiptImageId = receiptImageId;
 	}
 	
 	public String getReceiptImageId() {
@@ -38,9 +29,6 @@ public class ReceiptData {
 		return purchaseCost;
 	}
 
-	public String getPurchaseAddress() {
-		return purchaseAddress;
-	}
 
 	public Date getPurchaseDate() {
 		return purchaseDate;
@@ -53,17 +41,13 @@ public class ReceiptData {
 		if (o.getClass() != this.getClass())
 			return false;
 		ReceiptData cmp = (ReceiptData) o;
-		return (receiptImageId.equals(cmp.receiptImageId)) &&
-				(purchaseCost==cmp.purchaseCost) &&
-				(purchaseAddress.equals(cmp.purchaseAddress)) &&
-				(purchaseDate.equals(cmp.purchaseDate));
+		return this.itemId == cmp.itemId;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Датум: " + purchaseDate.toString() + "\n");
-		sb.append("Адреса: " + purchaseAddress + "\n");
 		sb.append("Потрошено: " + purchaseCost + "\n");
 		return sb.toString();
 	}
