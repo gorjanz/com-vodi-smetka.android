@@ -13,5 +13,6 @@
     <string name="correctThePrice">Correct the price</string>
     <string name="correctTheDate">Correct the date</string>
     <string name="getBack">Back</string>
+    <string name="fullImgDesc">Receipt view</string>
 	
 </resources>
