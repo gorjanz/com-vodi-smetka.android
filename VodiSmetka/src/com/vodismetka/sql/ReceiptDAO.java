@@ -7,11 +7,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.vodismetka.models.ReceiptData;
 
 public class ReceiptDAO {
+	
+	public static final String TAG = "ReceiptDAO";
 
 	private SQLiteDatabase db;
 	private ReceiptSQLiteHelper dbHelper;
@@ -36,6 +39,7 @@ public class ReceiptDAO {
 		rowValues.put(ReceiptSQLiteHelper.COLUMN_MONTH, rMonth);
 		
 		db.insert(ReceiptSQLiteHelper.TABLE_NAME, null, rowValues);
+		Log.i(TAG, "inserting: " + rowValues.toString());
 	}
 	
 	/**
