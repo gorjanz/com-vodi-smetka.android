@@ -52,7 +52,7 @@ public class AddNewReceiptActivity extends Activity {
 		Intent callingIntent = getIntent();
 		extractedPrice = callingIntent.getExtras().getInt(LaunchActivity.PRICE_KEY);
 		extractedDate = callingIntent.getExtras().getString(LaunchActivity.DATE_KEY);
-		extractedDate = callingIntent.getExtras().getString(LaunchActivity.IMG_KEY);
+		imgId = callingIntent.getExtras().getString(LaunchActivity.IMG_KEY);
 		
 		//set the initial price and date
 		priceText.setText(Integer.toString(extractedPrice));
@@ -89,7 +89,7 @@ public class AddNewReceiptActivity extends Activity {
 				
 				int rPrice = Integer.parseInt(priceText.getText().toString());
 				String rDate = dateText.getText().toString();
-				String[] dateParts = extractedDate.split("(\\W{1})");
+				String[] dateParts = rDate.split("(\\W{1})");
 	        	int rMonth = Integer.parseInt(dateParts[1]);
 	        	
 				dbDao.insertNewItem(rPrice, rDate, imgId, rMonth);
