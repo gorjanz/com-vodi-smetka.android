@@ -59,7 +59,7 @@ public class AddNewReceiptActivity extends Activity {
 		dateText.setText(extractedDate);
 		
 		//load and set the image
-		receiptPhoto.setImageBitmap(ImageFactory.loadImage(ImageFactory.IMAGES_PATH + imgId));
+		receiptPhoto.setImageBitmap(ImageFactory.loadImage(imgId));
 		
 		//view the full receipt
 		receiptPhoto.setOnClickListener(new View.OnClickListener() {
@@ -93,6 +93,8 @@ public class AddNewReceiptActivity extends Activity {
 	        	int rMonth = Integer.parseInt(dateParts[1]);
 	        	
 				dbDao.insertNewItem(rPrice, rDate, imgId, rMonth);
+				
+				finish();
 			}
 		});
         

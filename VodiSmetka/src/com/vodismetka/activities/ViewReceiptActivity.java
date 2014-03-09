@@ -16,7 +16,7 @@ public class ViewReceiptActivity extends Activity {
 		
 		ImageView rView = (ImageView) findViewById(R.id.fullImgView);
 		String imgId = getIntent().getExtras().getString(LaunchActivity.IMG_KEY);
-		rView.setImageBitmap(ImageFactory.loadImage(ImageFactory.IMAGES_PATH + imgId));
+		rView.setImageBitmap(ImageFactory.loadImage(imgId));
 	}
 	
 	@Override

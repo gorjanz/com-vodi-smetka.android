@@ -67,7 +67,8 @@ public class LaunchActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
+				Intent viewMonthly = new Intent(getApplicationContext(), MonthlyViewActivity.class);
+				startActivity(viewMonthly);
 			}
 
 		});

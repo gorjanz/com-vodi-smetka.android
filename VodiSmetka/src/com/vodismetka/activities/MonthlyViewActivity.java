@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.vodismetka.R;
+import com.vodismetka.models.ReceiptData;
 import com.vodismetka.sql.ReceiptDAO;
 import com.vodismetka.workers.MonthlyListAdapter;
 
@@ -39,13 +42,13 @@ public class MonthlyViewActivity extends ListActivity {
 		});
 	}
 	
-//	@Override
-//	protected void onListItemClick(ListView l, View v, int position, long id) {
-//		
-//		Model m = (Model) getListView().getItemAtPosition(position);
-//		Toast.makeText(this, m.toString(), Toast.LENGTH_SHORT).show();
-//		
-//	}
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		
+		ReceiptData m = (ReceiptData) getListView().getItemAtPosition(position);
+		Toast.makeText(this, m.toString(), Toast.LENGTH_SHORT).show();
+		
+	}
 	
 
 }
