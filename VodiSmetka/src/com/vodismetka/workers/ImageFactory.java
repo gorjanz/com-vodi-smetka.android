@@ -108,7 +108,7 @@ public class ImageFactory {
 		options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 		Bitmap bitmap = null;
 		try{
-			bitmap = BitmapFactory.decodeFile(photoPath, options);
+			bitmap = BitmapFactory.decodeFile(ImageFactory.IMAGES_PATH + photoPath, options);
 		} catch (Exception e){
 			Log.i(TAG, "Could not load bitmap from saved image file");
 		}
