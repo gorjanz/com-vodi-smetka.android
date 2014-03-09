@@ -16,9 +16,12 @@ import com.vodismetka.workers.TextAnalyzer;
 
 public class LaunchActivity extends Activity {
 
-	public static int CAMERA_PHOTO_REQUEST = 1;
+	public static final int CAMERA_PHOTO_REQUEST = 1;
 	public static final String TAG = "LaunchActivity";
-
+	public static final String PRICE_KEY = "priceKey";
+	public static final String DATE_KEY = "dateKey";
+	public static final String IMG_KEY = "imgKey";
+	
 	private Button addPurchase;
 	private Button seeWeeklySpenditure;
 	private Button seeMonthlySpenditure;
@@ -97,19 +100,19 @@ public class LaunchActivity extends Activity {
 			String extractedText = tessExtractor.getText();
 			
 			//analyze the text
-//			textAnalyzer = new TextAnalyzer(extractedText);
-			
-			seeMonthlySpenditure.setText(extractedText);
+			textAnalyzer = new TextAnalyzer(extractedText);
 			Log.i(TAG, "The extracted text is: " + extractedText);
 			
 			//get the analyzed data
-//			Date purchaseDate = textAnalyzer.getDate();
-//			int purchaseCost = textAnalyzer.getCost();
-//			String purchaseAddress = textAnalyzer.getAddress();
-//			
-//			//create the new receipt item
-//			ReceiptData receiptItem = new ReceiptData(purchaseCost, purchaseAddress, purchaseDate);
-//			
+			String purchaseDate = textAnalyzer.getDate();
+			int purchaseCost = textAnalyzer.getCost();
+			
+			//launch the affirmation screen for adding a new receipt
+			Intent addReceiptActivity = new Intent(getApplicationContext(), AddNewReceiptActivity.class);
+			addReceiptActivity.putExtra(DATE_KEY, purchaseDate);
+			addReceiptActivity.putExtra(PRICE_KEY, purchaseCost);
+			addReceiptActivity.putExtra(IMG_KEY, imageID);
+			startActivity(addReceiptActivity);
 			
 		}
 		
