@@ -13,7 +13,7 @@ import android.util.Log;
 public class ImageFactory {
 
 	public static final String TAG = "ImageFactory";
-	public static final String IMAGES_PATH = TessFactory.DATA_PATH + "images/";
+	public static final String IMAGES_PATH = TessFactory.DATA_PATH + "saved_images/";
 	
 	private Bitmap photo;
 	private String _path;
@@ -84,7 +84,8 @@ public class ImageFactory {
 	public void saveImage(Bitmap finalBitmap, String fname) {
 
 		String root = TessFactory.DATA_PATH;
-		File myDir = new File(root + "saved_images/");
+//		File myDir = new File(root + "saved_images/");
+		File myDir = new File(IMAGES_PATH);
 		myDir.mkdirs();
 		File file = new File(myDir, fname);
 		if (file.exists())
@@ -102,7 +103,7 @@ public class ImageFactory {
 		Log.i(TAG, "saved image successfully...");
 	}
 	
-	private Bitmap loadImage(String photoPath){
+	public static Bitmap loadImage(String photoPath){
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 		Bitmap bitmap = null;
