@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Vodi Smetka</string>
-    <string name="action_settings">Settings</string>
-    <string name="addPurchaseLabel">Add Purchase</string>
-	<string name="checkWeeklyLabel">See weekly expenses</string>
-	<string name="checkMonthlyLabel">See monthly expenses</string>
+    <string name="app_name">Води Сметка</string>
+    <string name="action_settings">Опции</string>
+    <string name="addPurchaseLabel">Додади сметка</string>
+	<string name="checkAllExspenses">Сите трошоци</string>
+	<string name="checkMonthlyLabel">Трошоци од овој месец</string>
 	<string name="imgDesc">logo</string>
-    <string name="newPhoto">new receipt</string>
-    <string name="weeklyLabel">Weekly expenses</string>
-    <string name="monthlyLabel">Monthly expenses</string>
-    <string name="correctThePrice">Correct the price</string>
-    <string name="correctTheDate">Correct the date</string>
-    <string name="getBack">Back</string>
-    <string name="fullImgDesc">Receipt view</string>
+    <string name="newPhoto">нова сметка</string>
+    <string name="monthlyLabel">Месечни трошоци</string>
+    <string name="correctThePrice">Корегирај ја цената</string>
+    <string name="correctTheDate">Корегирај го датумот</string>
+    <string name="getBack">Назад</string>
+    <string name="fullImgDesc">Преглед на сметката</string>
 	
 </resources>

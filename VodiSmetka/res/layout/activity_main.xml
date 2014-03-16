@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,21 +13,24 @@
         android:src="@drawable/receipt_paper_0" />
 
     <Button
-        android:id="@+id/seeWeekly"
+        android:id="@+id/seeAllExspenses"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/checkWeeklyLabel" />
+        android:layout_alignParentBottom="true"
+        android:text="@string/checkAllExspenses" />
 
     <Button
         android:id="@+id/seeMonthly"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/seeAllExspenses"
         android:text="@string/checkMonthlyLabel" />
 
     <Button
         android:id="@+id/addNewReceipt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/seeMonthly"
         android:text="@string/addPurchaseLabel" />
 
-</LinearLayout>
+</RelativeLayout>

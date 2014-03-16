@@ -14,7 +14,7 @@
         android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:id="@+id/monthId"
+        android:id="@+id/rowDateLabel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/icon"
@@ -23,11 +23,11 @@
         android:singleLine="true" />
 
     <TextView
-        android:id="@+id/monthlyCost"
+        android:id="@+id/rowCostLabel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/icon"
-        android:layout_below="@id/monthId"
+        android:layout_below="@id/rowDateLabel"
         android:layout_alignParentBottom="true"
         android:textSize="12sp"
         android:singleLine="true" />
