@@ -56,6 +56,8 @@ public class AddNewReceiptActivity extends Activity {
 		
 		//set the initial price and date
 		priceText.setText(Integer.toString(extractedPrice));
+		if(extractedPrice==-1)
+			priceText.setText(R.string.correctThePrice);
 		dateText.setText(extractedDate);
 		
 		//load and set the image

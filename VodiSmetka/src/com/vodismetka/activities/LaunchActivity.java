@@ -23,7 +23,7 @@ public class LaunchActivity extends Activity {
 	public static final String IMG_KEY = "imgKey";
 	
 	private Button addPurchase;
-	private Button seeWeeklySpenditure;
+	private Button seeAllExcpenses;
 	private Button seeMonthlySpenditure;
 	
 	private ImageFactory imgFactory;
@@ -37,7 +37,7 @@ public class LaunchActivity extends Activity {
 
 		// get buttons from views
 		addPurchase = (Button) findViewById(R.id.addNewReceipt);
-		seeWeeklySpenditure = (Button) findViewById(R.id.seeWeekly);
+		seeAllExcpenses = (Button) findViewById(R.id.seeAllExspenses);
 		seeMonthlySpenditure = (Button) findViewById(R.id.seeMonthly);
 
 		// set on-click listeners for the buttons
@@ -54,11 +54,12 @@ public class LaunchActivity extends Activity {
 
 		});
 
-		seeWeeklySpenditure.setOnClickListener(new View.OnClickListener() {
+		seeAllExcpenses.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
+				Intent viewAll = new Intent(getApplicationContext(), ViewAllExspensesActivity.class);
+				startActivity(viewAll);
 			}
 
 		});
