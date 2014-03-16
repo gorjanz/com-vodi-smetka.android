@@ -1,12 +1,14 @@
 package com.vodismetka.models;
 
+import java.util.Date;
+
 /**
  * 
  * @author Gorjan
  * Model class for the information available for a particular receipt
  */
-public class ReceiptData {
-	
+public class ReceiptData implements Comparable<ReceiptData> {
+
 	private int itemId;
 	private String receiptImageId;
 	private int purchaseCost;
@@ -21,6 +23,15 @@ public class ReceiptData {
 		this.purchaseDate = purchaseDate;
 		this.receiptImageId = receiptImageId;
 		this.month = month;
+	}
+	
+	@Override
+	public int compareTo(ReceiptData arg0) {
+		String[] date1 = purchaseDate.split("(\\W{1})");
+		String[] date2 = arg0.getPurchaseDate().split("(\\W{1})");
+		Date d1 = new Date(Integer.parseInt(date1[2]), Integer.parseInt(date1[1]), Integer.parseInt(date1[0]));
+		Date d2 = new Date(Integer.parseInt(date2[2]), Integer.parseInt(date2[1]), Integer.parseInt(date2[0]));
+		return d1.compareTo(d2);
 	}
 	
 	public String getReceiptImageId() {
@@ -79,7 +90,7 @@ public class ReceiptData {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Датум: " + purchaseDate + "\n");
-		sb.append("Потрошено: " + purchaseCost + "\n");
+		sb.append("Потрошено: " + purchaseCost + "ден.\n");
 		return sb.toString();
 	}
 
