@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +18,15 @@ import com.vodismetka.activities.LaunchActivity;
 import com.vodismetka.activities.ViewReceiptActivity;
 import com.vodismetka.models.ReceiptData;
 
-public class ListAllAdapter extends ArrayAdapter<ReceiptData>{
+public class ReceiptsAdapter extends ArrayAdapter<ReceiptData>{
 
 	private final Context context;
 	private List<ReceiptData> items;
 	private LayoutInflater inflater;
 	
-	public ListAllAdapter(Context context, List<ReceiptData> resource) {
-		super(context, R.layout.monthly_view, resource);
+	public ReceiptsAdapter(Context context, List<ReceiptData> resource) {
+		super(context, R.layout.receipt_list_view, resource);
 		inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		
 		items = resource;
 		this.context = context;
 	}
@@ -66,8 +66,26 @@ public class ListAllAdapter extends ArrayAdapter<ReceiptData>{
 			}
 		});
 		
-		holder.dateText.setText("Потрошено: " + Integer.toString(rowItem.getPurchaseCost()));
+		int spentAmount = rowItem.getPurchaseCost();
 		
+		//set spent amount
+		holder.dateText.setText("Потрошено: " + Integer.toString(spentAmount) + "ден.");
+		
+		//set the background color according to the amount spent
+		holder.layout.setBackgroundColor(context.getResources().getColor(R.color.red));
+		if(spentAmount<1000){
+			if(spentAmount<500){
+				if(spentAmount<100){
+					holder.layout.setBackgroundColor(context.getResources().getColor(R.color.green));
+				} else {
+					holder.layout.setBackgroundColor(context.getResources().getColor(R.color.yellow));
+				}
+			} else{
+				holder.layout.setBackgroundColor(context.getResources().getColor(R.color.orange));
+			}
+		}
+		
+		//set date
 		holder.priceText.setText("Датум: " + rowItem.getPurchaseDate());
 		
 		return convertView;
