@@ -35,7 +35,7 @@ public class MonthlyListAdapter extends ArrayAdapter<ReceiptData> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		View rowView = inflater.inflate(R.layout.monthly_list_row_item, null);
+		View rowView = inflater.inflate(R.layout.list_row_item, null);
 		final ReceiptData rowItem = items.get(position);
 		
 		//TO-DO get all items for month = position + 1, sum the prices and set the text fields accordingly
@@ -53,11 +53,11 @@ public class MonthlyListAdapter extends ArrayAdapter<ReceiptData> {
 		
 		//TO-DO sort by month and display receipts by for month
 		
-		TextView monthId = (TextView) rowView.findViewById(R.id.monthId);
+		TextView monthId = (TextView) rowView.findViewById(R.id.rowDateLabel);
 		//monthId.setText(Integer.toString(rowItem.getId()));
 		monthId.setText("Потрошено: " + Integer.toString(rowItem.getPurchaseCost()));
 		
-		TextView monthlySpent = (TextView) rowView.findViewById(R.id.monthlyCost);
+		TextView monthlySpent = (TextView) rowView.findViewById(R.id.rowCostLabel);
 		//monthlySpent.setText(Integer.toString(rowItem.getId()));
 		//Log.i(TAG,"Потрошено: " + Integer.toString(rowItem.getPurchaseCost()));
 		monthlySpent.setText("Датум: " + rowItem.getPurchaseDate());
@@ -65,7 +65,4 @@ public class MonthlyListAdapter extends ArrayAdapter<ReceiptData> {
 		return rowView;
 	}
 
-	
-
-	
 }
