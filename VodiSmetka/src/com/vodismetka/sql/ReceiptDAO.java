@@ -1,6 +1,7 @@
 package com.vodismetka.sql;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.ContentValues;
@@ -79,6 +80,10 @@ public class ReceiptDAO {
 			cursor.moveToNext();
 		}
 		
+		//sort in descending order by date
+		Collections.sort(items);
+		Collections.reverse(items);
+
 		return items;
 	}
 	
@@ -120,6 +125,10 @@ public class ReceiptDAO {
 			//move to next result of the query
 			cursor.moveToNext();
 		}
+		
+		//sort in descending order by date
+		Collections.sort(items);
+		Collections.reverse(items);
 		
 		return items;
 	}
