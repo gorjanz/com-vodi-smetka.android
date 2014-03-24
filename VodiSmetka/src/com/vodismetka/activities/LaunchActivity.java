@@ -1,13 +1,19 @@
 package com.vodismetka.activities;
 
+import java.util.concurrent.ExecutionException;
+
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.vodismetka.R;
 import com.vodismetka.workers.ImageFactory;
@@ -17,6 +23,7 @@ import com.vodismetka.workers.TextAnalyzer;
 public class LaunchActivity extends Activity {
 
 	public static final int CAMERA_PHOTO_REQUEST = 1;
+	public static final int DIALOG_DOWNLOAD_PROGRESS = 10;
 	public static final String TAG = "LaunchActivity";
 	public static final String PRICE_KEY = "priceKey";
 	public static final String DATE_KEY = "dateKey";
@@ -25,9 +32,10 @@ public class LaunchActivity extends Activity {
 	private Button addPurchase;
 	private Button seeAllExcpenses;
 	private Button seeMonthlySpenditure;
+	private ProgressDialog progressDialog;
 	
 	private ImageFactory imgFactory;
-	private TessExtractor tessExtractor;
+	//private TessExtractor tessExtractor;
 	private TextAnalyzer textAnalyzer;
 
 	@Override
@@ -96,10 +104,26 @@ public class LaunchActivity extends Activity {
 			photo = imgFactory.getImg();
 			
 			//get tessExtractor object
-			tessExtractor = new TessExtractor(this, photo);
+			TessExtractor[] tess = new TessExtractor[1];
+			tess[0] = new TessExtractor(this, photo);
 			
 			//extract the text
-			String extractedText = tessExtractor.getText();
+			//String extractedText = tessExtractor.getText();
+			
+			showDialog(DIALOG_DOWNLOAD_PROGRESS);
+			
+			//extracting the text in a background thread
+			AsyncTask<TessExtractor, Integer, String> asyncExtractor = new AsyncExtractor().execute(tess);
+			String extractedText = "";
+			try {
+				extractedText = asyncExtractor.get();
+			} catch (InterruptedException e) {
+				Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_SHORT).show();
+				Log.e(TAG,e.getMessage());
+			} catch (ExecutionException e) {
+				Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_SHORT).show();
+				Log.e(TAG,e.getMessage());
+			}
 			
 			//analyze the text
 			textAnalyzer = new TextAnalyzer(extractedText);
@@ -118,12 +142,52 @@ public class LaunchActivity extends Activity {
 			
 		}
 		
-		
+	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id) {
+	    switch (id) {
+	    case DIALOG_DOWNLOAD_PROGRESS:
+	        progressDialog = new ProgressDialog(this);
+	        progressDialog.setMessage("recognizing the text...");
+	        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+	        progressDialog.setCancelable(false);
+	        //progressDialog.show();
+	        return progressDialog;
+	    default:
+	    return null;
+	    }
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
+	}
+	
+	private class AsyncExtractor extends AsyncTask<TessExtractor, Integer, String> {
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+		}
+		
+		@Override
+		protected String doInBackground(TessExtractor... params) {
+			return params[0].getText();
+		}
+
+		@Override
+		protected void onProgressUpdate(Integer... values) {
+			super.onProgressUpdate(values);
+			progressDialog.incrementProgressBy(values[0]);
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			super.onPostExecute(result);
+			progressDialog.dismiss();
+		}
+
 	}
 
 }
