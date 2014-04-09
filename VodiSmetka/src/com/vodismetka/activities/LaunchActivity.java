@@ -89,11 +89,16 @@ public class LaunchActivity extends Activity {
 		if(resultCode==RESULT_CANCELED)
 			return;
 		if(resultCode==RESULT_OK && requestCode==CAMERA_PHOTO_REQUEST){
+			progressDialog = (ProgressDialog) onCreateDialog(DIALOG_DOWNLOAD_PROGRESS);
+			progressDialog.show();
+			
 			Bundle returnData = data.getExtras();
 			Bitmap photo = (Bitmap) returnData.get("data");
 			
 			if(photo == null){
 				Log.e(TAG, "camera intent not returning any image...");
+				progressDialog.dismiss();
+				return;
 			}
 			String imageID = "img" + Long.toString(System.currentTimeMillis()) + ".jpg";
 			
@@ -110,18 +115,17 @@ public class LaunchActivity extends Activity {
 			//extract the text
 			//String extractedText = tessExtractor.getText();
 			
-			showDialog(DIALOG_DOWNLOAD_PROGRESS);
-			
 			//extracting the text in a background thread
 			AsyncTask<TessExtractor, Integer, String> asyncExtractor = new AsyncExtractor().execute(tess);
 			String extractedText = "";
+
 			try {
 				extractedText = asyncExtractor.get();
 			} catch (InterruptedException e) {
-				Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Анализата на сметката беше неуспешна...", Toast.LENGTH_SHORT).show();
 				Log.e(TAG,e.getMessage());
 			} catch (ExecutionException e) {
-				Toast.makeText(getApplicationContext(), "Something went wrong...", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Анализата на сметката беше неуспешна...", Toast.LENGTH_SHORT).show();
 				Log.e(TAG,e.getMessage());
 			}
 			
@@ -149,9 +153,10 @@ public class LaunchActivity extends Activity {
 	    switch (id) {
 	    case DIALOG_DOWNLOAD_PROGRESS:
 	        progressDialog = new ProgressDialog(this);
-	        progressDialog.setMessage("recognizing the text...");
 	        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 	        progressDialog.setCancelable(false);
+	        progressDialog.setMessage("Сметката се анализира...");
+	        progressDialog.setProgress(0);
 	        //progressDialog.show();
 	        return progressDialog;
 	    default:
@@ -169,6 +174,7 @@ public class LaunchActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
+			progressDialog.show();
 		}
 		
 		@Override

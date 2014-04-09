@@ -57,7 +57,7 @@ public class AddNewReceiptActivity extends Activity {
 		//set the initial price and date
 		priceText.setText(Integer.toString(extractedPrice));
 		if(extractedPrice==-1)
-			priceText.setText(R.string.correctThePrice);
+			priceText.setText(Integer.toString(0));
 		dateText.setText(extractedDate);
 		
 		//load and set the image
@@ -74,14 +74,14 @@ public class AddNewReceiptActivity extends Activity {
 			}
 		});
 		
-		//remind the user to check and correct the price
-		priceText.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(getApplicationContext(), "Please verify the correct price of the receipt...", Toast.LENGTH_SHORT).show();
-			}
-		});
+//		//remind the user to check and correct the price
+//		priceText.setOnClickListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View v) {
+//				Toast.makeText(getApplicationContext(), "Please verify the correct price of the receipt...", Toast.LENGTH_SHORT).show();
+//			}
+//		});
 		
 		//insert the new receipt in the database
 		submit.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +95,7 @@ public class AddNewReceiptActivity extends Activity {
 	        	int rMonth = Integer.parseInt(dateParts[1]);
 	        	
 				dbDao.insertNewItem(rPrice, rDate, imgId, rMonth);
+				dbDao.close();
 				
 				finish();
 			}
@@ -134,7 +135,7 @@ public class AddNewReceiptActivity extends Activity {
         	month = Integer.parseInt(dateParts[1]);
         	year = Integer.parseInt(dateParts[2]);
         }catch(Exception e) {
-        	Toast.makeText(getApplicationContext(), "Sorry... The date of the receipt could not be recognized...", Toast.LENGTH_LONG).show();
+        	//Toast.makeText(getApplicationContext(), "Sorry... The date of the receipt could not be recognized...", Toast.LENGTH_LONG).show();
         	year = 2014;
             month = 1;
             day = 1;

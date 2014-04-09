@@ -1,5 +1,7 @@
 package com.vodismetka.activities;
 
+import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,9 +32,14 @@ public class ViewAllExspensesActivity extends ListActivity {
 		// create the data access object
 		dataAccessObject = new ReceiptDAO(this);
 
+		//get all items
+		List<ReceiptData> items = dataAccessObject.getItems();
+		
 		// set the list adapter and get the items
 		// list.setAdapter(new ListAdapter(this, dataAccessObject.getItems()));
-		setListAdapter(new ReceiptsAdapter(this, dataAccessObject.getItems()));
+		setListAdapter(new ReceiptsAdapter(this, items));
+		
+		((TextView)findViewById(R.id.listViewFooterText)).setText("Преглед на " + items.size() + " сметки" );
 
 		Button backButton = (Button) findViewById(R.id.back);
 		backButton.setOnClickListener(new View.OnClickListener() {
