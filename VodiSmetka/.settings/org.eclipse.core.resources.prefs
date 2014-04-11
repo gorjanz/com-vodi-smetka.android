@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/com/vodismetka/activities/LaunchActivity.java=UTF-8
+encoding//src/com/vodismetka/activities/MonthlyViewActivity.java=UTF-8
+encoding//src/com/vodismetka/activities/ViewAllExspensesActivity.java=UTF-8
 encoding//src/com/vodismetka/models/ReceiptData.java=UTF-8
+encoding//src/com/vodismetka/workers/ReceiptsAdapter.java=UTF-8

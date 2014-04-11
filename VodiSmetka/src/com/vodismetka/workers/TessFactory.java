@@ -17,7 +17,7 @@ import com.vodismetka.exceptions.TesseractNotInitializedException;
 
 public class TessFactory {
 
-	public static final String lang = "fs24B";
+	public static final String lang = "fs40B";
 	public static final String DATA_PATH = Environment
 			.getExternalStorageDirectory().toString() + "/VodiSmetka/";
 

@@ -71,7 +71,8 @@ public abstract class TextFactory {
 			Log.i(TAG,"Start index: " + matcher.start());
 			Log.i(TAG,"End index: " + matcher.end() + " ");
 		    String matched = matcher.group();
-		    Log.i(TAG,matched);
+		    Log.i(TAG, "Datum found: " + matched);
+		    date = matched;
 		} else {
 			throw new UnrecognizableDateException("Date could not be recognized");
 		}

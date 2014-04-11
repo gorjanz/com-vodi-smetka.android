@@ -1,10 +1,13 @@
 package com.vodismetka.activities;
 
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -60,6 +63,8 @@ public class AddNewReceiptActivity extends Activity {
 			priceText.setText(Integer.toString(0));
 		dateText.setText(extractedDate);
 		
+		Log.i(TAG, "date: " + extractedDate + " price: " + extractedPrice);
+		
 		//load and set the image
 		receiptPhoto.setImageBitmap(ImageFactory.loadImage(imgId));
 		
@@ -89,13 +94,29 @@ public class AddNewReceiptActivity extends Activity {
 			@Override
 			public void onClick(View v) { 
 				
-				int rPrice = Integer.parseInt(priceText.getText().toString());
-				String rDate = dateText.getText().toString();
-				String[] dateParts = rDate.split("(\\W{1})");
-	        	int rMonth = Integer.parseInt(dateParts[1]);
+		    	Calendar current = Calendar.getInstance();
+				int month = current.get(Calendar.MONTH);
+				int day = current.get(Calendar.DAY_OF_MONTH);
+				int year = current.get(Calendar.YEAR);
+				
+				int rPrice = 0;
+				String rDate = "";
+				int rMonth;
+				try {
+					rPrice = Integer.parseInt(priceText.getText().toString());
+					rDate = dateText.getText().toString();
+					String[] dateParts = rDate.split("(\\W{1})");
+					rMonth = Integer.parseInt(dateParts[1]);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					Log.e(TAG,e.getMessage());
+					rDate = String.valueOf(day)+"/"+String.valueOf(month+1)+"/"+String.valueOf(year);
+					rMonth = month+1;
+					rPrice = 0;
+				}
 	        	
 				dbDao.insertNewItem(rPrice, rDate, imgId, rMonth);
-				dbDao.close();
+				//dbDao.close();
 				
 				finish();
 			}
@@ -136,9 +157,10 @@ public class AddNewReceiptActivity extends Activity {
         	year = Integer.parseInt(dateParts[2]);
         }catch(Exception e) {
         	//Toast.makeText(getApplicationContext(), "Sorry... The date of the receipt could not be recognized...", Toast.LENGTH_LONG).show();
-        	year = 2014;
-            month = 1;
-            day = 1;
+	    	Calendar current = Calendar.getInstance();
+			month = current.get(Calendar.MONTH);
+			day = current.get(Calendar.DAY_OF_MONTH);
+			year = current.get(Calendar.YEAR);
         }
         
         switch (id) {

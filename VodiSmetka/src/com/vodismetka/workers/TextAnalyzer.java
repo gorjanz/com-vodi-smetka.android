@@ -1,5 +1,6 @@
 package com.vodismetka.workers;
 
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +25,7 @@ public class TextAnalyzer {
 	// fill extractedPrice and extractedDate from extText
 	private void extract() {
 		String fixed = TextFactory.fixString(extText);
+		Log.i(TAG, extText + "\n -------------------------------- \n" + fixed);
 		extractedPrice = getReceiptPrice(fixed);
 		extractedDate = getReceiptDate(fixed);
 		return;
@@ -53,13 +55,19 @@ public class TextAnalyzer {
 		String date = "";
 	    try{
 	    	String extDate = TextFactory.findDatum(text);
+	    	Log.i(TAG, extDate);
 			String[] parts = extDate.split("datum\\W{1}");
 	    	Log.i(TAG, parts[1]);
 	    	date = parts[1];
 	    }catch(Exception e){
 	    	Log.i(TAG, e.getMessage());
-	    	date = "";
+	    	Calendar current = Calendar.getInstance();
+			int month = current.get(Calendar.MONTH);
+			int day = current.get(Calendar.DAY_OF_MONTH);
+			int year = current.get(Calendar.YEAR);
+			date = String.valueOf(day)+"/"+String.valueOf(month+1)+"/"+String.valueOf(year);
 	    }
+	    Log.i(TAG, date);
 		return date;
 	}
 
